@@ -3,11 +3,12 @@ package it.elsalamander.calculatorbridge.layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import it.elsalamander.calculatorbridge.R
 
-class DrawerAdapter(private val dataSet: Array<String>, val callback: DrawerAdapterCallback): RecyclerView.Adapter<DrawerAdapter.ViewHolder>() {
+class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: DrawerAdapterCallback): RecyclerView.Adapter<DrawerAdapter.ViewHolder>() {
 
     interface DrawerAdapterCallback {
         fun onDrawerItemClick (value: String)
@@ -16,10 +17,12 @@ class DrawerAdapter(private val dataSet: Array<String>, val callback: DrawerAdap
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val title : TextView
         val desc : TextView
+        val img : ImageView
 
         init{
             title = view.findViewById(R.id.item_layout_text_title)
             desc = view.findViewById(R.id.item_layout_text_description)
+            img = view.findViewById(R.id.item_layout_image)
 
             view.setOnClickListener(this)
         }
@@ -36,8 +39,9 @@ class DrawerAdapter(private val dataSet: Array<String>, val callback: DrawerAdap
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.title.text = dataSet[position]
-        viewHolder.desc.text = "prove"
+        viewHolder.title.text = dataSet[position].title
+        viewHolder.desc.text = dataSet[position].desc
+        viewHolder.img.setImageBitmap(dataSet[position].image)
     }
 
     override fun getItemCount() = dataSet.size
