@@ -7,13 +7,18 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import it.elsalamander.calculatorbridge.databinding.ActivityMainBinding
 import it.elsalamander.calculatorbridge.layout.DrawerAdapter
 import it.elsalamander.calculatorbridge.layout.ItemRecyclerView
 import it.elsalamander.loaderclass.ManagerLoadExtentions
+
 
 class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
 
@@ -26,6 +31,7 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
     lateinit var navController: NavController
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var managerExtentions : ManagerLoadExtentions
+    var extFrag : Fragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +53,16 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
         //Carica la lista della RecyclerView
         this.loadItems()
 
+        navController.addOnDestinationChangedListener { _, _, _ ->
+            extFrag?.let {
+                onBackPressed()
+                extFrag = null
+                invalidateMenu()
+            }
+        }
+
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -58,16 +74,21 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
     }
 
+    override fun onResume() {
+        this.loadItems()
+        super.onResume()
+    }
+
     /**
      * Carica la lista nella recyclerView
      */
     private fun loadItems() {
         val list = ArrayList<ItemRecyclerView>()
         managerExtentions.extentions.forEach {
-            list.add(ItemRecyclerView(it.value.second))
+            list.add(ItemRecyclerView(it.value.second, it.value.first))
         }
         list.add(ItemRecyclerView(ADD_TITLE, ADD_DESCRIPTION,
-            BitmapFactory.decodeResource(resources, R.mipmap.addestensioneicon)))
+            BitmapFactory.decodeResource(resources, R.mipmap.addestensioneicon), null))
         //aggiorna la lista
         loadDrawerItems(list)
     }
@@ -82,7 +103,6 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
         }
     }
 
-
     /**
      * Evento chiamato quando viene premuto qualcosa nel Drawer
      * Evento lanciato quando viene premuto un elemento nella recyclerView
@@ -91,15 +111,35 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback {
     override fun onDrawerItemClick(value: String) {
         //chiudi la lista drawer
         binding.drawerLayout.closeDrawer(GravityCompat.START)
-        //Log.d("DIREZIONE", value)
 
         if(value == ADD_TITLE){
             managerExtentions.loadNewExtension()
             this.loadItems()
-        }
+        }else{
+            val direction = NavGraphDirections.navigationMove(value)
+            navController.navigate(direction)
 
-        //var direction = NavGraphDirections.refreshMainFragment(value)
-        //navController.navigate(direction)
+            val fm: FragmentManager = supportFragmentManager
+            val fragmentTransaction : FragmentTransaction = fm.beginTransaction()
+            extFrag = managerExtentions.extentions[value]!!.second.getFragment(this)
+            fragmentTransaction.add(R.id.nav_host_fragment,extFrag!!, null)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+    }
+
+    /**
+     * Rimuovi l'estensione
+     */
+    fun removeEstensione(value: String) {
+        Log.d("RIMUOVI ESTENSIONE", "--------------------------------------")
+        //esci dalla view dell'estensione
+        onBackPressed()
+
+        //elimina l'estensione
+        managerExtentions.removeExtension(value)
+
+        loadItems()
     }
 
 

@@ -25,5 +25,29 @@
             app:argType="string"
             android:defaultValue="Default value"/>
     </action>
+
+    <fragment
+        android:id="@+id/emptyFrag"
+        android:name="it.elsalamander.calculatorbridge.layout.EmptyFragment"
+        android:label="EmptyFragLabel">
+        <argument
+            android:name="value"
+            app:argType="string"
+            android:defaultValue="Default value"/>
+    </fragment>
+
+    <action android:id="@+id/navigationMove"
+        app:destination="@id/emptyFrag">
+        <argument
+            android:name="value"
+            app:argType="string"
+            android:defaultValue="Default value"/>
+    </action>
+
+
+
+
+
+
 </navigation>
 

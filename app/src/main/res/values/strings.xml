@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">StackOverflowSolutions</string>
+    <string name="app_name">Calcolatrice</string>
 
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Calcolatrice</string>
+    <string name="nav_header_subtitle">Versione 1.0</string>
     <string name="nav_header_desc">Navigation header</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="calculator_hint_text">Inserisci l\'espressione</string>
+    <string name="rimuovi_estensione_text">Elimina estensione</string>
+    <string name="nav_header_estensione_title">Estensioni Presenti</string>
+    <string name="calculator_calc_button_text">Calcola</string>
 </resources>

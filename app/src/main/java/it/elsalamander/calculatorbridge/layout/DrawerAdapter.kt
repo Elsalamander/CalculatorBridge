@@ -7,6 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import it.elsalamander.calculatorbridge.R
+import it.elsalamander.loaderclass.ManagerLoadExtentions
+import org.json.JSONObject
 
 class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: DrawerAdapterCallback): RecyclerView.Adapter<DrawerAdapter.ViewHolder>() {
 
@@ -18,6 +20,7 @@ class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: D
         val title : TextView
         val desc : TextView
         val img : ImageView
+        var json : JSONObject? = null
 
         init{
             title = view.findViewById(R.id.item_layout_text_title)
@@ -28,7 +31,11 @@ class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: D
         }
 
         override fun onClick(v: View?) {
-            callback.onDrawerItemClick(title.text.toString())
+            if(json != null){
+                callback.onDrawerItemClick(json!!.getString(ManagerLoadExtentions.DESC_PATH_NAME))
+            }else{
+                callback.onDrawerItemClick(title.text.toString())
+            }
         }
     }
 
@@ -42,6 +49,7 @@ class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: D
         viewHolder.title.text = dataSet[position].title
         viewHolder.desc.text = dataSet[position].desc
         viewHolder.img.setImageBitmap(dataSet[position].image)
+        viewHolder.json = dataSet[position].json
     }
 
     override fun getItemCount() = dataSet.size
