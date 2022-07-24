@@ -3,8 +3,7 @@ package it.elsalamander.calculatorbridge.layout.listener
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import it.elsalamander.calculatorbridge.R
-import it.elsalamander.calculatorbridge.calculator.Calculator
+import it.elsalamander.loaderclass.calculator.execute.Calculator
 
 class CalculatorButtonListener(val calculator: Calculator, val input: EditText, val resultText: TextView) : View.OnClickListener {
 
