@@ -34,10 +34,17 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var managerExtentions : ManagerLoadExtentions
     var extFrag : Fragment? = null
-    val calculator = Calculator()
+    lateinit var calculator : Calculator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //carica le attuali estensioni
+        managerExtentions = ManagerLoadExtentions(this)
+
+        //crea la calcolatrice
+        calculator = Calculator(managerExtentions)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         navController = findNavController(R.id.nav_host_fragment)
 
@@ -49,9 +56,6 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
 
         //Imposta la action bar con il Nav controller
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        //carica le attuali estensioni
-        managerExtentions = ManagerLoadExtentions(this)
 
         //Carica la lista della RecyclerView
         this.loadItems()
@@ -146,7 +150,7 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
     }
 
     override fun getMyCalculator() : Calculator {
-        return this.calculator
+        return this.calculator!!
     }
 
     override fun getLoaderExtension(): ManagerLoadExtentions {
