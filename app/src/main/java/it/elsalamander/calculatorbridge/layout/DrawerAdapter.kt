@@ -10,6 +10,13 @@ import it.elsalamander.calculatorbridge.R
 import it.elsalamander.loaderclass.ManagerLoadExtentions
 import org.json.JSONObject
 
+/****************************************************************
+ * Adapter per la recyclerView
+ *
+ * @author: Elsalamander
+ * @data: 14 luglio 2022
+ * @version: v1.0
+ ****************************************************************/
 class DrawerAdapter(private val dataSet: List<ItemRecyclerView>, val callback: DrawerAdapterCallback): RecyclerView.Adapter<DrawerAdapter.ViewHolder>() {
 
     interface DrawerAdapterCallback {

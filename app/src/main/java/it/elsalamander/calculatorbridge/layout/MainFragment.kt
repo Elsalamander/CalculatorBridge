@@ -14,7 +14,13 @@ import it.elsalamander.calculatorbridge.R
 import it.elsalamander.calculatorbridge.layout.listener.CalculatorButtonListener
 import it.elsalamander.loaderclass.calculator.execute.Calculator
 
-
+/****************************************************************
+ * Fragment per la calcolatrice
+ *
+ * @author: Elsalamander
+ * @data: 14 luglio 2022
+ * @version: v1.0
+ ****************************************************************/
 class MainFragment : Fragment() {
 
     private val args: MainFragmentArgs by navArgs()

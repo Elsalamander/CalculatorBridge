@@ -5,6 +5,14 @@ import android.widget.EditText
 import android.widget.TextView
 import it.elsalamander.loaderclass.calculator.execute.Calculator
 
+/****************************************************************
+ * Evento da realizzare quando ci preme il bottone nella
+ * calcolatrice
+ *
+ * @author: Elsalamander
+ * @data: 14 luglio 2022
+ * @version: v1.0
+ ****************************************************************/
 class CalculatorButtonListener(val calculator: Calculator, val input: EditText, val resultText: TextView) : View.OnClickListener {
 
     /**

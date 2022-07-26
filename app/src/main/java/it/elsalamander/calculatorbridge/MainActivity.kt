@@ -21,7 +21,13 @@ import it.elsalamander.loaderclass.Holder
 import it.elsalamander.loaderclass.ManagerLoadExtentions
 import it.elsalamander.loaderclass.calculator.execute.Calculator
 
-
+/****************************************************************
+ * Main activity per il bridge e calcolatrice
+ *
+ * @author: Elsalamander
+ * @data: 13 luglio 2022
+ * @version: v1.0
+ ****************************************************************/
 class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, Holder {
 
     companion object{

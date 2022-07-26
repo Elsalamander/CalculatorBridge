@@ -7,7 +7,14 @@ import androidx.navigation.fragment.navArgs
 import it.elsalamander.calculatorbridge.MainActivity
 import it.elsalamander.calculatorbridge.R
 
-
+/****************************************************************
+ * Fragment vuoto dove si passerà poi al fragment dell'estensione
+ * aperta.
+ *
+ * @author: Elsalamander
+ * @data: 14 luglio 2022
+ * @version: v1.0
+ ****************************************************************/
 class EmptyFragment : Fragment() {
 
     private val args: EmptyFragmentArgs by navArgs()
