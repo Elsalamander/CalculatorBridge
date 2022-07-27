@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import it.elsalamander.calculatorbridge.MainActivity
 import it.elsalamander.calculatorbridge.R
 import it.elsalamander.calculatorbridge.layout.listener.CalculatorButtonListener
-import it.elsalamander.loaderclass.calculator.execute.Calculator
 
 /****************************************************************
  * Fragment per la calcolatrice
@@ -22,8 +21,6 @@ import it.elsalamander.loaderclass.calculator.execute.Calculator
  * @version: v1.0
  ****************************************************************/
 class MainFragment : Fragment() {
-
-    private val args: MainFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)

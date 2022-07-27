@@ -13,7 +13,7 @@ import it.elsalamander.loaderclass.calculator.execute.Calculator
  * @data: 14 luglio 2022
  * @version: v1.0
  ****************************************************************/
-class CalculatorButtonListener(val calculator: Calculator, val input: EditText, val resultText: TextView) : View.OnClickListener {
+class CalculatorButtonListener(private val calculator: Calculator, private val input: EditText, private val resultText: TextView) : View.OnClickListener {
 
     /**
      * Called when a view has been clicked.

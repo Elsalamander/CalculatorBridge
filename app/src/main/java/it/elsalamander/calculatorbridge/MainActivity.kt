@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import it.elsalamander.calculatorbridge.databinding.ActivityMainBinding
 import it.elsalamander.calculatorbridge.layout.DrawerAdapter
 import it.elsalamander.calculatorbridge.layout.ItemRecyclerView
+import it.elsalamander.calculatorbridge.layout.MainFragment
 import it.elsalamander.loaderclass.Holder
 import it.elsalamander.loaderclass.ManagerLoadExtentions
 import it.elsalamander.loaderclass.calculator.execute.Calculator
@@ -35,11 +36,11 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
         const val ADD_DESCRIPTION = "Clicca per aggiungere una estensione"
     }
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
-    lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var managerExtentions : ManagerLoadExtentions
-    var extFrag : Fragment? = null
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var navController : NavController
+    private lateinit var appBarConfiguration : AppBarConfiguration
+    private lateinit var managerExtentions : ManagerLoadExtentions
+    private var extFrag : Fragment? = null
     lateinit var calculator : Calculator
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,7 +157,7 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
     }
 
     override fun getMyCalculator() : Calculator {
-        return this.calculator!!
+        return this.calculator
     }
 
     override fun getLoaderExtension(): ManagerLoadExtentions {
