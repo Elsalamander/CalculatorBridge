@@ -146,7 +146,6 @@ class MainActivity : AppCompatActivity(), DrawerAdapter.DrawerAdapterCallback, H
      * Rimuovi l'estensione
      */
     fun removeEstensione(value: String) {
-        Log.d("RIMUOVI ESTENSIONE", "--------------------------------------")
         //esci dalla view dell'estensione
         onBackPressed()
 
